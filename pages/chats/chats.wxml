@@ -1,0 +1,5 @@
+<!--pages/chats/chats.wxml-->
+<view style="text-align:center"> {{title}} 
+  <input bindinput="bindKeyInput" value="{{inputValue}}" />
+  <button bindtap="sendMessage">发送</button>
+</view>

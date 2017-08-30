@@ -1,0 +1,4 @@
+<view class="classname">
+  <navigator url="url">对话列表</navigator>
+  <navigator url="/pages/me/me" open-type="switchTab">我</navigator>
+</view>
