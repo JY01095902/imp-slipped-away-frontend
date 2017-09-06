@@ -1,12 +1,13 @@
 // pages/chats/chats.js
 var _socketOpen = false
 var _socketMsgQueue = []
+var _app = getApp()
 
-function sendSocketMessage(msg) {
+function sendSocketMessage(username, msg) {
   if (_socketOpen) {
     wx.sendSocketMessage({
       data: JSON.stringify({
-        username: "shi.yanxun",
+        username: username,
         message: msg
       })
     })
@@ -22,10 +23,17 @@ Page({
    */
   data: {
     title: "CHATS",
-    inputValue: "sss"
+    inputValue: "sss",
+    myNickName: null,
+    messages: [
+      { username: 'YUAN', message: "AAA" },
+      { username: 'YUAN', message: "BBB" },
+      { username: '史妍珣', message: "CCC" }]
+
   },
-  sendMessage: function(e) {
-    sendSocketMessage(this.data.inputValue)
+  sendMessage: function (e) {
+    const nickName = _app.globalData.userInfo.nickName
+    sendSocketMessage(nickName, this.data.inputValue)
   },
   bindKeyInput: function(e) {
     this.setData({
@@ -38,10 +46,11 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      title: options.title
+      title: options.title,
+      myNickName: _app.globalData.userInfo.nickName
     })
     wx.connectSocket({
-      url: 'ws://localhost:5678/ws'
+      url: 'ws://47.94.157.28:9000/ws'
     })
     wx.onSocketOpen(function (res) {
       console.log('WebSocket连接已打开！')
@@ -51,8 +60,16 @@ Page({
       }
       _socketMsgQueue = []
     })
+    let messages = this.data.messages
+    const ref = this
     wx.onSocketMessage(function (res) {
-      //alert('收到服务器内容：' + res.data)
+      if (messages) {
+        messages.push(JSON.parse(res.data))
+        ref.setData({
+          messages: messages
+        })
+        console.log('11：' + messages)
+      }
       console.log('收到服务器内容：' + res.data)
     })
     wx.onSocketError(function (res) {

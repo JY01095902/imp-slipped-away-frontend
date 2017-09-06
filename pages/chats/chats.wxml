@@ -1,5 +1,11 @@
 <!--pages/chats/chats.wxml-->
 <view style="text-align:center"> {{title}} 
-  <input bindinput="bindKeyInput" value="{{inputValue}}" />
-  <button bindtap="sendMessage">发送</button>
+<view wx:for="{{messages}}">
+  <view style="width:100%; text-align:left;" wx:if="{{item.username != myNickName}}"><label>{{item.message}}</label></view>
+  <view style="width:100%; text-align:right;" wx:if="{{item.username == myNickName}}"><label>{{item.message}}</label></view>
+</view>
+  <view>
+    <input bindinput="bindKeyInput" value="{{inputValue}}" />
+    <button bindtap="sendMessage">发送</button>
+  </view>
 </view>
