@@ -51,6 +51,7 @@ Page({
     })
     wx.connectSocket({
       url: 'ws://47.94.157.28:9000/ws'
+      // url: 'ws://localhost:9000/ws'
     })
     wx.onSocketOpen(function (res) {
       console.log('WebSocket连接已打开！')

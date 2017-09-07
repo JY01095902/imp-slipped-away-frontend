@@ -57,7 +57,8 @@ App({
 
   saveUser: (user) => {
     wx.request({
-      url: 'http://localhost:9111/users',
+      // url: 'http://localhost:9000/users',
+      url: 'http://47.94.157.28:9000/users',
       method: 'POST',
       data: {
         open_id: user.openId,
