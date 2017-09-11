@@ -1,4 +1,4 @@
-<!--pages/chats/chats.wxml-->
+<!--pages/contacts/contacts.wxml-->
 <view class="">
   <ul wx:for="{{contacts}}">
     <li>

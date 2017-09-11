@@ -1,4 +1,4 @@
-// pages/chats/chats.js
+// pages/contacts/contacts.js
 Page({
 
   /**
